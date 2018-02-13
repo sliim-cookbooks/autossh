@@ -1,0 +1,32 @@
+---
+driver:
+  name: vagrant
+  use_sudo: false
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: <%= ENV['CHEF_VERSION'] || 13 %>
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: debian-8.7
+
+suites:
+  - name: attributes
+    run_list:
+      - recipe[autossh]
+      - recipe[autossh::services]
+    attributes:
+      autossh:
+        kitchen:
+          ssh_host: localhost
+          lport: 42
+          rport: 22
+          luser: kitchen
+          ruser: kitchen
+  - name: lwrp
+    run_list:
+      - recipe[autossh]
+      - recipe[autossh_lwrp]
