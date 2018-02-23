@@ -16,6 +16,11 @@
 # limitations under the License.
 #
 
+execute 'systemctl-daemon-reload' do
+  action :nothing
+  command 'systemctl daemon-reload'
+end
+
 node['autossh'].each do |name, config|
   autossh_service name do
     bin config['bin'] if config.key? 'bin'

@@ -45,6 +45,8 @@ action :create do
               rport: new_resource.rport,
               luser: new_resource.luser,
               ruser: new_resource.ruser
+    notifies :run, 'execute[systemctl-daemon-reload]', :immediately
+    notifies :restart, "service[autossh-#{new_resource.name}]", :delayed
   end
 
   service "autossh-#{new_resource.name}" do
