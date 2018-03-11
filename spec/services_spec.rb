@@ -36,7 +36,7 @@ describe 'autossh::services' do
     expect(subject).to create_template('/etc/systemd/system/autossh-example.service')
       .with(owner: 'root',
             group: 'root',
-            mode: '0640',
+            mode: '0644',
             source: 'autossh.service.erb')
   end
 

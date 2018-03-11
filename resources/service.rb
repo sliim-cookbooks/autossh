@@ -33,7 +33,7 @@ action :create do
   template "/etc/systemd/system/autossh-#{new_resource.name}.service" do
     owner 'root'
     group 'root'
-    mode '0640'
+    mode '0644'
     source 'autossh.service.erb'
     cookbook 'autossh'
     variables bin: new_resource.bin,
