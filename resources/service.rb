@@ -19,6 +19,7 @@
 resource_name :autossh_service
 provides :autossh_service
 
+property :enabled, [TrueClass, FalseClass], default: true
 property :bin, String, default: '/usr/bin/autossh'
 property :flags, String, default: '-NR'
 property :ssh_host, String, default: ''
@@ -50,7 +51,7 @@ action :create do
   end
 
   service "autossh-#{new_resource.name}" do
-    action :enable
+    action new_resource.enabled ? :enable : :disable
     supports status: true, start: true, stop: true, restart: true
   end
 end

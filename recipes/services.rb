@@ -23,6 +23,7 @@ end
 
 node['autossh'].each do |name, config|
   autossh_service name do
+    enabled config['enabled'] if config.key? 'enabled'
     bin config['bin'] if config.key? 'bin'
     flags config['flags'] if config.key? 'flags'
     ssh_port config['ssh_port'] if config.key? 'ssh_port'

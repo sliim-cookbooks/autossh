@@ -3,25 +3,31 @@
 require_relative 'spec_helper'
 
 describe 'autossh::services' do
+  example = {
+    enabled: true,
+    bin: 'autossh',
+    flags: '--custom-flags',
+    ssh_port: 22,
+    ssh_host: 'example.com',
+    bind: '0.0.0.0',
+    lport: 42,
+    rport: 1337,
+    luser: 'sliim',
+    ruser: 'sliim',
+  }
+
   let(:subject) do
     ChefSpec::SoloRunner.new(step_into: %w(autossh_service),
                              platform: 'debian',
                              version: '9.0') do |node|
-      node.override['autossh']['example']['bin'] = 'autossh'
-      node.override['autossh']['example']['flags'] = '--custom-flags'
-      node.override['autossh']['example']['ssh_port'] = 22
-      node.override['autossh']['example']['ssh_host'] = 'example.com'
-      node.override['autossh']['example']['bind'] = '0.0.0.0'
-      node.override['autossh']['example']['lport'] = 42
-      node.override['autossh']['example']['rport'] = 1337
-      node.override['autossh']['example']['luser'] = 'sliim'
-      node.override['autossh']['example']['ruser'] = 'sliim'
+      node.override['autossh']['example'] = example
     end.converge described_recipe
   end
 
   it 'creates autossh_service[example]' do
     expect(subject).to create_autossh_service('example')
-      .with(bin: 'autossh',
+      .with(enabled: true,
+            bin: 'autossh',
             flags: '--custom-flags',
             ssh_port: 22,
             ssh_host: 'example.com',
@@ -42,5 +48,24 @@ describe 'autossh::services' do
 
   it 'enables service[autossh-example]' do
     expect(subject).to enable_service('autossh-example')
+  end
+
+  context 'disabled service' do
+    let(:subject) do
+      ChefSpec::SoloRunner.new(step_into: %w(autossh_service),
+                               platform: 'debian',
+                               version: '9.0') do |node|
+        node.override['autossh']['example'] = example
+        node.override['autossh']['example']['enabled'] = false
+      end.converge described_recipe
+    end
+
+    it 'does not enable service[autossh-example]' do
+      expect(subject).to_not enable_service('autossh-example')
+    end
+
+    it 'disables service[autossh-example]' do
+      expect(subject).to disable_service('autossh-example')
+    end
   end
 end
