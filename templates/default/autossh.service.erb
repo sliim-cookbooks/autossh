@@ -3,6 +3,8 @@
 
 [Unit]
 Description=AutoSSH Service
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 User=<%= @luser %>
@@ -10,4 +12,4 @@ Environment="AUTOSSH_GATETIME=0"
 ExecStart=<%= @bin %> <%= @flags %> <%= @lport %>:<%= @bind %>:<%= @rport %> <%= @ruser %>@<%= @ssh_host %> -p <%= @ssh_port %>
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=network-online.target
