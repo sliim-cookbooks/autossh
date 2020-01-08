@@ -3,7 +3,7 @@ maintainer 'Sliim'
 maintainer_email 'sliim@mailoo.org'
 license 'Apache-2.0'
 description 'Deploy autossh services'
-version '0.2.0'
+version '0.3.0'
 chef_version '>= 12.0'
 
 supports 'debian', '> 7.0'
