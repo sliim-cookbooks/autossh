@@ -15,9 +15,7 @@ describe 'autossh::services' do
   }
 
   let(:subject) do
-    ChefSpec::SoloRunner.new(step_into: %w(autossh_service),
-                             platform: 'debian',
-                             version: '9.0') do |node|
+    ChefSpec::SoloRunner.new(step_into: %w(autossh_service)) do |node|
       node.override['autossh']['example'] = example
     end.converge described_recipe
   end
@@ -50,9 +48,7 @@ describe 'autossh::services' do
 
   context 'disabled service' do
     let(:subject) do
-      ChefSpec::SoloRunner.new(step_into: %w(autossh_service),
-                               platform: 'debian',
-                               version: '9.0') do |node|
+      ChefSpec::SoloRunner.new(step_into: %w(autossh_service)) do |node|
         node.override['autossh']['example'] = example
         node.override['autossh']['example']['enabled'] = false
       end.converge described_recipe
