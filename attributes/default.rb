@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Cookbook Name:: autossh
+# Cookbook:: autossh
 # Attributes:: default
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

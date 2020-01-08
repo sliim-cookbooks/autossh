@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 include_recipe 'autossh'
 
 autossh_service 'kitchen' do

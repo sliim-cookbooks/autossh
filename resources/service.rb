@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Cookbook Name:: autossh
+# Cookbook:: autossh
 # Resource:: service
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +17,7 @@
 resource_name :autossh_service
 provides :autossh_service
 
-property :enabled, [TrueClass, FalseClass], default: true
+property :enabled, [true, false], default: true
 property :bin, String, default: '/usr/bin/autossh'
 property :flags, String, default: '-NR'
 property :ssh_host, String, default: ''

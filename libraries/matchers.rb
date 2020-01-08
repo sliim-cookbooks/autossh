@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Cookbook Name:: autossh
+# Cookbook:: autossh
 # Library:: matchers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +14,10 @@
 # limitations under the License.
 #
 
-if defined?(ChefSpec)
-  def create_autossh_service(path)
-    ChefSpec::Matchers::ResourceMatcher.new(:autossh_service, :create, path)
-  end
+def create_autossh_service(path)
+  ChefSpec::Matchers::ResourceMatcher.new(:autossh_service, :create, path)
+end
 
-  def delete_autossh_service(path)
-    ChefSpec::Matchers::ResourceMatcher.new(:autossh_service, :delete, path)
-  end
+def delete_autossh_service(path)
+  ChefSpec::Matchers::ResourceMatcher.new(:autossh_service, :delete, path)
 end

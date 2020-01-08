@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 def bundle_exec(command)
   sh "bundle exec #{command}"
 end

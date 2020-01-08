@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 describe file '/etc/systemd/system/autossh-kitchen.service' do
   it { should be_file }
   it { should be_mode 0640 }
